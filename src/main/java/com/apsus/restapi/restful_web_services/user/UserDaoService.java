@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserDaoService {
+
     //JPA/Hibernate/Database
     // findAll
     // save

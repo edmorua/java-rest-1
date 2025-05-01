@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello")
 public class HelloWorldController {
 
-    @GetMapping()
-    public String hello(){
-        return "Hello World";
-    }
+	@GetMapping()
+	public String hello() {
+		return "Hello World";
+	}
 
 
-    @GetMapping(path="/bean")
-    public HelloWorldBean helloBean(){
-        return new HelloWorldBean("Hello World");
-    }
+	@GetMapping(path = "/bean")
+	public HelloWorldBean helloBean() {
+		return new HelloWorldBean("Hello World");
+	}
 
-    @GetMapping(path="/bean/{name}")
-    public HelloWorldBean helloBean(@PathVariable String name){
-        return new HelloWorldBean("Hello World " + name);
-    }
+	@GetMapping(path = "/bean/{name}")
+	public HelloWorldBean helloBean(@PathVariable String name) {
+		return new HelloWorldBean("Hello World " + name);
+	}
 }

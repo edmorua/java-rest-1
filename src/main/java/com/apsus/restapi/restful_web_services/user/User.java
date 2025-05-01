@@ -3,79 +3,71 @@ package com.apsus.restapi.restful_web_services.user;
 import java.time.LocalDate;
 
 public class User {
-    private Long id;
-    private String name;
-    private String email;
-    private String password;
-    private LocalDate birthDate;
+	private Long id;
+	private String name;
+	private String email;
+	private String password;
+	private LocalDate birthDate;
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
 
 
+	public long getId() {
+		return id;
+	}
 
-    static private User[] users = new User[]{
-            new User(1L,"eduardo", "email", "123445"),
-            new User(2L,"jean", "jean", "56789")
-    };
+	public void setId(long id) {
+		this.id = id;
+	}
 
+	public String getName() {
+		return name;
+	}
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 
-    public User(Long id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+	public User(Long id, String name, String email, String password) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
 
-    public User(){}
+	public User(){}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "User{" +
+			"id=" + id +
+			", name='" + name + '\'' +
+			", email='" + email + '\'' +
+			", password='" + password + '\'' +
+			", birthDate=" + birthDate +
+			'}';
+	}
 }
