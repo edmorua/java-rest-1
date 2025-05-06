@@ -1,12 +1,20 @@
 package com.apsus.restapi.restful_web_services.user;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+@Entity(name = "user_details")
 public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Size(min = 3, message = "Name should have at least 3 characters")
@@ -22,7 +30,6 @@ public class User {
 	public User(Long id, String name, String email, String password, LocalDate birthDate) {
 		this.id = id;
 		this.name = name;
-
 		this.email = email;
 		this.password = password;
 		this.birthDate = birthDate;
