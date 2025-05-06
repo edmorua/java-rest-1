@@ -1,6 +1,8 @@
 package com.apsus.restapi.restful_web_services.user;
 
 import jakarta.validation.Valid;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,12 +26,16 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public User getUserById(@PathVariable Long id) {
+	public EntityModel<User> getUserById(@PathVariable Long id) {
 		User userFound = userDaoService.findOne(id);
 		if (userFound == null) {
 			throw new UserNotFoundException("id: " + id);
 		}
-		return userFound;
+		EntityModel<User> userEntityModel = EntityModel.of(userFound);
+		WebMvcLinkBuilder link =
+			WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
+		userEntityModel.add(link.withRel("all-users"));
+		return userEntityModel;
 	}
 
 	@PostMapping()

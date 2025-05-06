@@ -14,6 +14,7 @@ public class User {
 	@Email(message = "Invalid email address")
 	private String email;
 	@Size(min = 6, message = "Password should have at least 6 characters")
+	//@JsonIgnore static filtering
 	private String password;
 	@Past(message = "Birthdate should be in the past")
 	private LocalDate birthDate;
@@ -21,6 +22,7 @@ public class User {
 	public User(Long id, String name, String email, String password, LocalDate birthDate) {
 		this.id = id;
 		this.name = name;
+
 		this.email = email;
 		this.password = password;
 		this.birthDate = birthDate;
