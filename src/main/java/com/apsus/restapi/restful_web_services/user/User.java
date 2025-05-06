@@ -1,13 +1,11 @@
 package com.apsus.restapi.restful_web_services.user;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-@JsonFilter(value = "UserFilter")
 public class User {
 	private Long id;
 
