@@ -1,13 +1,32 @@
 package com.apsus.restapi.restful_web_services.user;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class User {
 	private Long id;
+
+	@Size(min = 3, message = "Name should have at least 3 characters")
 	private String name;
+	@Email(message = "Invalid email address")
 	private String email;
+	@Size(min = 6, message = "Password should have at least 6 characters")
 	private String password;
+	@Past(message = "Birthdate should be in the past")
 	private LocalDate birthDate;
+
+	public User(Long id, String name, String email, String password, LocalDate birthDate) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.birthDate = birthDate;
+	}
+
+	public User() {}
 
 	public LocalDate getBirthDate() {
 		return birthDate;
@@ -17,12 +36,11 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -49,16 +67,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-	public User(Long id, String name, String email, String password) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
-
-	public User(){}
 
 	@Override
 	public String toString() {
