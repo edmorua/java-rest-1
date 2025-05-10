@@ -16,8 +16,10 @@ import java.util.Optional;
 public class UserJpaController {
 
 	private final UserRepository userRepository;
+	private final PostRepository postRepository;
 
-	public UserJpaController(UserRepository userRepository) {
+	public UserJpaController(UserRepository userRepository, PostRepository postRepository) {
+		this.postRepository = postRepository;
 		this.userRepository = userRepository;
 	}
 
@@ -37,6 +39,32 @@ public class UserJpaController {
 			WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
 		userEntityModel.add(link.withRel("all-users"));
 		return userEntityModel;
+	}
+
+	@GetMapping("/{id}/posts")
+	public List<Post> getUserPosts(@PathVariable Long id) {
+		Optional<User> userFound = userRepository.findById(id);
+		if (userFound.isEmpty()) {
+			throw new UserNotFoundException("id: " + id);
+		}
+		return userFound.get().getPosts();
+	}
+
+	@PostMapping("/{id}/posts")
+	public ResponseEntity<Object> saveUserPost(@PathVariable Long id,
+	                                           @Valid @RequestBody Post post) {
+		Optional<User> userFound = userRepository.findById(id);
+		if (userFound.isEmpty()) {
+			throw new UserNotFoundException("id: " + id);
+		}
+		post.setUser(userFound.get());
+		Post savedPost = postRepository.save(post);
+
+		URI location =
+			ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(savedPost.getId())
+				.toUri();
+		return ResponseEntity.created(location).build();
 	}
 
 	@PostMapping()

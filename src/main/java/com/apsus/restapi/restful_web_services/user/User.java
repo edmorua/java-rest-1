@@ -1,14 +1,13 @@
 package com.apsus.restapi.restful_web_services.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "user_details")
 public class User {
@@ -26,6 +25,10 @@ public class User {
 	private String password;
 	@Past(message = "Birthdate should be in the past")
 	private LocalDate birthDate;
+
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Post> posts;
 
 	public User(Long id, String name, String email, String password, LocalDate birthDate) {
 		this.id = id;
@@ -86,5 +89,13 @@ public class User {
 			", password='" + password + '\'' +
 			", birthDate=" + birthDate +
 			'}';
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 }

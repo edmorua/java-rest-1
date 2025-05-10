@@ -31,3 +31,14 @@ VALUES (1, 'alice@example.com', 'Alice Johnson', 'pass1234', '1990-03-15'),
        (30, 'oscar@example.com', 'Oscar Neal', 'oscarpwd', '1992-10-15');
 ALTER TABLE user_details
     ALTER COLUMN id RESTART WITH 31;
+
+
+INSERT INTO post (id, user_id, description, title)
+VALUES (1, 1, 'This is a test for user 1', 'Testing'),
+       (2, 4, 'This is amazing', 'Amazing'),
+       (3, 2, 'I started a new blog', 'Blog'),
+       (4, 1, 'The test was successfully', 'Finishing testing'),
+       (5, 1, 'I am hungy', 'Need to eat');
+
+ALTER TABLE post
+    ALTER COLUMN id RESTART WITH 6;
